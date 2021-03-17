@@ -10,6 +10,8 @@ import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
 import Record from '../views/Record.vue'
 
+
+
 Vue.use(VueRouter)
 
 const routes = [
