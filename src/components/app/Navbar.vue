@@ -49,7 +49,7 @@ export default {
   }),
   methods:{
     async logout(){
-      this.$store.dispatch('logout')
+      await this.$store.dispatch('logout')
       this.$router.push('/login?message=logout')
     }
   },
