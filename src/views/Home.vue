@@ -9,7 +9,10 @@
     </button>
   </div>
 
-  <div class="row">
+
+  <loader v-if="loading" />
+
+  <div v-else class="row">
 
     <HomeBill />
     <HomeCurrency />
@@ -23,8 +26,13 @@
 import HomeBill from '@/components/HomeBill.vue'
 import HomeCurrency from '@/components/HomeCurrency.vue'
 
+
 export default {
-  name: 'Home',
+  name: 'home',
+  data: () => ({
+    loading: true,
+    currency: null
+  }),
   components: {
     HomeBill, HomeCurrency
   }

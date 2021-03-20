@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
+import Loader from './components/Loader'
 import 'materialize-css/dist/js/materialize.min'
 
 import firebase from 'firebase/app'
@@ -15,6 +16,7 @@ import 'firebase/database'
 //Vue.use(messagePlugin)
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
+Vue.component('Loader', Loader)
 
 
 firebase.initializeApp({
@@ -38,10 +40,6 @@ firebase.auth().onAuthStateChanged(()=> {
     }).$mount('#app')
   }
 })
-
-firebase.analytics();
-
-
 
 new Vue({
   router,
