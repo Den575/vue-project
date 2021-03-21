@@ -17,10 +17,14 @@ export default new Vuex.Store({
       state.error = null
     }
   },
+  actions: {
+    async fetchCurrency() {
+      const res = await fetch(`https://api.exchangeratesapi.io/latest?symbols=USD%2CEUR%2CPLN&base=PLN`)
+      return await res.json()
+    }
+  },
   getters: {
     error: s => s.error
-  },
-  actions: {
   },
   modules: {
     auth, info

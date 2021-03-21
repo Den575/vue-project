@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
+import currencyFilter from './filters/currency.filter'
 import Loader from './components/Loader'
 import 'materialize-css/dist/js/materialize.min'
 
@@ -16,6 +17,7 @@ import 'firebase/database'
 //Vue.use(messagePlugin)
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
+Vue.filter('currency',currencyFilter)
 Vue.component('Loader', Loader)
 
 

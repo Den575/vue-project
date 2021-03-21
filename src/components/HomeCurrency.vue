@@ -15,10 +15,11 @@
             </thead>
 
             <tbody>
-            <tr>
-              <td>руб</td>
-              <td>12121</td>
-              <td>12.12.12</td>
+            <tr v-for="cur in currencies"
+            :key="cur">
+              <td>{{cur}}</td>
+              <td>{{rates[cur].toFixed(2)}}</td>
+              <td>{{date}}</td>
             </tr>
             </tbody>
           </table>
@@ -26,3 +27,12 @@
       </div>
     </div>
 </template>
+
+<script lang="ts">
+export default ({
+  props: ['rates', 'date'],
+  data: () => ({
+    currencies: ['PLN','USD','EUR']
+  })
+})
+</script>
