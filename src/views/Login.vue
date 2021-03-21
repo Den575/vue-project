@@ -68,7 +68,7 @@ export default ({
   },
   mounted(){
     if(this.$route.query.message == 'logout'){
-      M.toast({html: 'Logout. Please login :)'})
+      M.toast({html: 'Logout... :)'})
     } 
   },
   methods: {
