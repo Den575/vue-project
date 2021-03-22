@@ -15,9 +15,6 @@ export default {
     watch: {
         error(fbError) {
             console.log(fbError)
-            if(fbError.code == 'auth/user-not-found'){
-            M.toast({html: fbError.message})
-            }
             M.toast({html: fbError.message})
         }
     }
