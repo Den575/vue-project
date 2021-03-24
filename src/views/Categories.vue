@@ -11,10 +11,10 @@
       <CategoryEdit
       v-if="categories.length" 
       :categories="categories"
-      :key="categories.length"
-      @update="updateCategories+updateCount"
+      :key="categories.length + updateCount "
+      @updated="updateCategories"
       />
-      <p v-else class="center">You dont have data...</p>
+      <p v-else class="center">You don't have data...</p>
     </div>
   </section>
 </div>

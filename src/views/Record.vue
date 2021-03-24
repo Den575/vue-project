@@ -4,11 +4,17 @@
     <h3>Новая запись</h3>
   </div>
 
-  <form class="form">
+  <loader v-if="loading" />
+  <p class="center" v-else-if="!categories.length">You dont have any data... <router-link to="/categories">Add new category ?</router-link></p>
+
+  
+  <form class="form" v-else @submit.prevent="handelSubmit">
     <div class="input-field" >
-      <select>
-        <option
-        >name cat</option>
+      <select ref="select">
+        <option v-for="c in categories"
+        :key="c.id"
+        :value="c.id"
+        >{{c.title}}</option>
       </select>
       <label>Выберите категорию</label>
     </div>
@@ -20,6 +26,7 @@
             name="type"
             type="radio"
             value="income"
+            v-model="type"
         />
         <span>Доход</span>
       </label>
@@ -32,6 +39,7 @@
             name="type"
             type="radio"
             value="outcome"
+            v-model="type"
         />
         <span>Расход</span>
       </label>
@@ -41,19 +49,33 @@
       <input
           id="amount"
           type="number"
+          v-model.number="amount"
+          :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
       >
       <label for="amount">Сумма</label>
-      <span class="helper-text invalid">amount пароль</span>
-    </div>
+      <span 
+              v-if="$v.amount.$dirty && !$v.amount.minValue"
+              class="helper-text invalid"
+              >
+              Min value is 1
+      </span>
+      </div>
 
     <div class="input-field">
       <input
           id="description"
           type="text"
+          v-model="description"
+          :class="{invalid: $v.description.$dirty && !$v.description.required}"
+      
       >
       <label for="description">Описание</label>
-      <span
-            class="helper-text invalid">description пароль</span>
+      <span 
+              v-if="$v.description.$dirty && !$v.description.required"
+              class="helper-text invalid"
+              >
+              Enter description
+      </span>
     </div>
 
     <button class="btn waves-effect waves-light" type="submit">
@@ -63,3 +85,65 @@
   </form>
 </div>
 </template>
+
+<script>
+/*global M*/
+import {required, minValue} from 'vuelidate/lib/validators'
+import {mapGetters} from 'vuex'
+
+export default {
+  name: 'record',
+  data: () => ({
+    loading: true,
+    select:null,
+    categories: [],
+    type: 'outcome',
+    amount: 1,
+    description: ''
+  }),
+  computed: {
+    ...mapGetters(['info']),
+    CanCreateRecord() {
+      if (this.type === 'income') {
+        return true
+      }
+      else{
+        return this.info.bill >= this.amount
+      }
+    }
+  },
+  methods: {
+    handelSubmit() {
+       if(this.$v.$invalid){
+        this.$v.$touch()
+        return
+      }
+      
+      if(this.CanCreateRecord) {
+        M.toast({html: ' dodac cos potem'})
+      }
+      else{
+        M.toast({html: `You have no money: -(${this.amount - this.info.bill}) :(`})
+      }
+    }
+  },
+  validations: {
+        amount: {minValue: minValue(1)},
+        description: {required}
+    },
+  async mounted() {
+    this.categories =  await this.$store.dispatch('fetchCategories')
+    this.loading = false
+    
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select)
+      M.updateTextFields()
+    }, 0)
+  },
+  destroyed() {
+    if(this.select && this.select.destroy) {
+      this.select.destroy
+    }
+  }
+}
+</script>

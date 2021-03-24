@@ -26,7 +26,7 @@ export default {
       if(this.$store.getters.info.bill == null){
         console.log('Bill is null');
       }
-      return this.$store.getters.info.bill / (this.rates['PLN'] * this.rates['EUR'])
+      return this.$store.getters.info.bill
     }
   },
   methods: {
