@@ -10,7 +10,7 @@
   
   <form class="form" v-else @submit.prevent="handelSubmit">
     <div class="input-field" >
-      <select ref="select">
+      <select ref="select" v-model="category">
         <option v-for="c in categories"
         :key="c.id"
         :value="c.id"
@@ -99,6 +99,7 @@ export default {
     categories: [],
     type: 'outcome',
     amount: 1,
+    category: null,
     description: ''
   }),
   computed: {
@@ -113,17 +114,35 @@ export default {
     }
   },
   methods: {
-    handelSubmit() {
+   async handelSubmit() {
        if(this.$v.$invalid){
         this.$v.$touch()
         return
       }
       
       if(this.CanCreateRecord) {
-        M.toast({html: ' dodac cos potem'})
+        try{
+          await this.$store.dispatch('createRecord', {
+            categoryId: this.category,
+            amount: this.amount,
+            description: this.description,
+            type: this.type,
+            date: new Date().toJSON()
+        })
+      const bill = this.type === 'income' ? this.info.bill + this.amount
+      : this.info.bill - this.amount
+
+      await this.$store.dispatch('updateInfo', {bill})
+      M.toast({html: 'Success'})
+      this.$v.$reset()
+      this.amount =1 
+      this.description = ''
       }
-      else{
-        M.toast({html: `You have no money: -(${this.amount - this.info.bill}) :(`})
+      catch (e) {
+        console.log(e);
+      }
+      }else{
+        M.toast({html: `Тot enough money in the account: -${this.amount - this.info.bill} :(`})
       }
     }
   },
@@ -135,6 +154,8 @@ export default {
     this.categories =  await this.$store.dispatch('fetchCategories')
     this.loading = false
     
+    this.category = this.categories[0].id
+
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select)
       M.updateTextFields()
