@@ -27,6 +27,7 @@ import Sidebar from '../components/app/Sidebar.vue'
 import Loader from '../components/Loader.vue'
 
 export default {
+  /*global M*/
   name: 'main-layout',
   data: () => ({
     isOpen: true,
@@ -41,6 +42,17 @@ export default {
   components: {
     Navbar, Sidebar,
     Loader
-  }
+  },
+  computed: {
+        error() {
+            return this.$store.getters.error
+        }
+    },
+    watch: {
+        error(fbError) {
+            console.log(fbError)
+            M.toast({html: fbError.message})
+        }
+    }
 }
 </script>
