@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    meta: {layout: 'main',auth: true},
+    meta: {layout: 'main', auth: true},
     component: Home
   },
   {
@@ -65,7 +65,7 @@ const routes = [
     component: Categories
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'detail',
     meta: {layout: 'main', auth: true},
     component: Detail
@@ -85,9 +85,13 @@ router.beforeEach((to, from, next) => {
   if(requireAuth && !currentUser) {
     next('/login?message=login')
   }
+  else if (!requireAuth && currentUser) {
+    next('/')
+  }
   else{
     next()
   }
 })
+
 
 export default router
