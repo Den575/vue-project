@@ -54,6 +54,7 @@
       <button
           class="btn waves-effect waves-light auth-submit"
           type="submit"
+          onClick="sendMail()"
       >
         Зарегистрироваться
         <i class="material-icons right">send</i>
