@@ -7,6 +7,7 @@ import Vuelidate from 'vuelidate'
 import currencyFilter from './filters/currency.filter'
 import Loader from './components/Loader'
 import 'materialize-css/dist/js/materialize.min'
+var Paginate = require('vuejs-paginate')
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 Vue.use(Vuelidate)
 Vue.filter('currency',currencyFilter)
 Vue.component('Loader', Loader)
+Vue.component('paginate', Paginate)
 
 
 firebase.initializeApp({
