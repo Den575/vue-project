@@ -1,7 +1,7 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Новая запись</h3>
+    <h3></h3>
   </div>
 
   <loader v-if="loading" />
@@ -16,7 +16,7 @@
         :value="c.id"
         >{{c.title}}</option>
       </select>
-      <label>Выберите категорию</label>
+      <label>Wybierz kategorię</label>
     </div>
 
     <p>
@@ -28,7 +28,7 @@
             value="income"
             v-model="type"
         />
-        <span>Доход</span>
+        <span>Wpływy</span>
       </label>
     </p>
 
@@ -41,7 +41,7 @@
             value="outcome"
             v-model="type"
         />
-        <span>Расход</span>
+        <span>Wydatek</span>
       </label>
     </p>
 
@@ -52,7 +52,7 @@
           v-model.number="amount"
           :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
       >
-      <label for="amount">Сумма</label>
+      <label for="amount">Suma</label>
       <span 
               v-if="$v.amount.$dirty && !$v.amount.minValue"
               class="helper-text invalid"
@@ -69,7 +69,7 @@
           :class="{invalid: $v.description.$dirty && !$v.description.required}"
       
       >
-      <label for="description">Описание</label>
+      <label for="description">Opis</label>
       <span 
               v-if="$v.description.$dirty && !$v.description.required"
               class="helper-text invalid"
@@ -79,7 +79,7 @@
     </div>
 
     <button class="btn waves-effect waves-light" type="submit">
-      Создать
+      ZAktualizuj
       <i class="material-icons right">send</i>
     </button>
   </form>

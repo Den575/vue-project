@@ -2,7 +2,7 @@
     <div class="col s12 m6">
         <div>
           <div class="page-subtitle">
-            <h4>Редактировать</h4>
+            <h4>Redagować</h4>
           </div>
 
           <form @submit.prevent="submitHandler">
@@ -14,7 +14,7 @@
                 :value="c.id"
                 >{{c.title}}</option>
               </select>
-              <label>Выберите категорию</label>
+              <label>Wybierz kategorię</label>
             </div>
 
             <div class="input-field">
@@ -24,12 +24,12 @@
                   v-model="title"
                   :class="{invalid: $v.title.$dirty && !$v.title.required}"
               >
-              <label for="name">Название</label>
+              <label for="name">Nazwa</label>
               <span 
               v-if="$v.title.$dirty && !$v.title.required"
               class="helper-text invalid"
               >
-              Enter category
+              Wprowadź kategorię
               </span>
             </div>
 
@@ -40,16 +40,16 @@
                   v-model.number="limit"
                   :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
               >
-              <label for="limit">Лимит</label>
+              <label for="limit">Limit</label>
               <span 
               v-if="$v.limit.$dirty && !$v.limit.minValue"
               class="helper-text invalid"
               >
-              Min value </span>
+              Min value is 1</span>
             </div>
 
             <button class="btn waves-effect waves-light" type="submit">
-              Обновить
+              ZAktualizuj
               <i class="material-icons right">send</i>
             </button>
           </form>

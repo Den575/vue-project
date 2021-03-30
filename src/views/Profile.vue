@@ -12,14 +12,14 @@
           v-model="name"
           :class="{invalid: $v.name.$dirty && !$v.name.required}"
       >
-      <label for="description">Имя</label>
+      <label for="description">Imię</label>
       <small class="helper-text invalid"
       v-if="$v.name.$dirty && !$v.name.required"
       >Please enter name</small>
     </div>
 
     <button class="btn waves-effect waves-light" type="submit">
-      Обновить
+      ZAktualizuj
       <i class="material-icons right">send</i>
     </button>
   </form>

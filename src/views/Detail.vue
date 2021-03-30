@@ -5,7 +5,7 @@
 
   <div v-else-if="record">
     <div class="breadcrumb-wrap">
-      <router-link to="/history" class="breadcrumb">History</router-link>
+      <router-link to="/history" class="breadcrumb">Historia</router-link>
       <a @click.prevent class="breadcrumb">
         {{record.type === 'income' ? 'Income':'Outcome'}}
       </a>
@@ -15,9 +15,9 @@
         <div class="card"
         :class="{'red' : record.type === 'outcome', 'green':record.type === 'income'}">
           <div class="card-content white-text">
-            <p>Description: {{record.description}}</p>
-            <p>Amount: {{record.amount}}</p>
-            <p>Category: {{record.categoryName}}</p>
+            <p>Opis: {{record.description}}</p>
+            <p>Liczba: {{record.amount}}</p>
+            <p>Kategoria: {{record.categoryName}}</p>
 
             <small>{{record.date}}</small>
           </div>

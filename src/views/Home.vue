@@ -2,7 +2,7 @@
   <div>
     <div>
   <div class="page-title">
-    <h3>Счет</h3>
+    <h3>Konto</h3>
 
     <button class="btn waves-effect waves-light btn-small">
       <i class="material-icons" @click="refresh">refresh</i>
