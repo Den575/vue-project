@@ -23,7 +23,7 @@
             <ul id='dropdown' class='dropdown-content'>
               <li>
                 <router-link to="/profile" class="black-text">
-                  <i class="material-icons">account_circle</i>Profile
+                  <i class="material-icons">account_circle</i>Profil
                 </router-link>
               </li>
               <li class="divider" tabindex="-1"></li>

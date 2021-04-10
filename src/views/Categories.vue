@@ -1,7 +1,7 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Kategorii</h3>
+    <h3>Kategorie</h3>
   </div>
   <section>
     <loader v-if="loading" />

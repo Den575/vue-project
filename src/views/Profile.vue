@@ -1,7 +1,7 @@
 <template>
     <div>
   <div class="page-title">
-    <h3>Konto</h3>
+    <h3>Profil</h3>
   </div>
 
   <form class="form" @submit.prevent="submitHandler">

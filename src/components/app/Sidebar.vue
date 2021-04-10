@@ -14,11 +14,11 @@ export default {
     props: ['value'],
     data: () => ({
         links: [
-            {title: 'Konto', url: '/', exact: true},
+            {title: 'Stan Konta', url: '/', exact: true},
             {title: 'Historia', url: '/history'},
-            {title: 'Planowanie', url: '/planning'},
-            {title: 'Nowy zapis', url: '/record'},
-            {title: 'Kategorii', url: '/categories'}
+            {title: 'Budżet', url: '/planning'},
+            {title: 'Nowy rekord', url: '/record'},
+            {title: 'Kategorie', url: '/categories'}
         ]
     })
 }
