@@ -4,15 +4,21 @@
       <h3>Historia</h3>
     </div>
 
-    <div class="history-chart">
-      <canvas ref="canvas"></canvas>
+    <div>
+      <h3> Wydatki </h3>
+      <PieChart chartType="outcome"/>
+    </div>
+
+    <div>
+      <h3> Przychody </h3>
+      <PieChart chartType="income"/>
     </div>
 
     <loader v-if="loading"/>
 
     <p class="center" v-else-if="!records.length">
       Jeszcze nic nie ma...
-      <router-link to="/record">Dodaj nowy</router-link>
+      <router-link to="/record">Dodaj nowy rekord</router-link>
     </p>
     <section v-else>
       <HistoryTable :records="items"/>
@@ -30,12 +36,12 @@
 <script>
 import HistoryTable from '../components/HistoryTable'
 import paginationMixin from '../mixsins/pagination.mixin'
-import {Bar} from 'vue-chartjs'
+// import BarChart from '../components/charts/BarChart';
+import PieChart from '../components/charts/PieChart';
 
 export default {
   name: 'history',
   mixins: [paginationMixin],
-  extends: Bar,
   data: () => ({
     loading: true,
     records: []
@@ -45,40 +51,6 @@ export default {
     const categories = await this.$store.dispatch('fetchCategories')
 
     this.setup(categories)
-
-    this.renderChart({
-      labels: categories.map(c => c.title),
-      datasets: [
-        {
-          label: 'Wydatki',
-          data: categories.map(c => {
-            return this.records.reduce((total, r) => {
-              if (r.categoryId === c.id && r.type === 'outcome') {
-                total += +r.amount
-              }
-              return total
-            }, 0)
-          }),
-          borderColor: 'rgba(255, 99, 132, 1)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderWidth: 1,
-        },
-        {
-          label: 'Przychody',
-          data: categories.map(c => {
-            return this.records.reduce((total, r) => {
-              if (r.categoryId === c.id && r.type === 'income') {
-                total += +r.amount
-              }
-              return total
-            }, 0)
-          }),
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderWidth: 1
-        }
-      ],
-    })
 
     this.loading = false
   },
@@ -95,7 +67,9 @@ export default {
     }
   },
   components: {
-    HistoryTable
+    HistoryTable,
+    // BarChart,
+    PieChart
   }
 }
 </script>

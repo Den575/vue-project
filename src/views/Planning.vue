@@ -5,11 +5,13 @@
     <h4>{{info.bill | currency('PLN')}}</h4>
   </div>
 
+  <BarChart/>
+
   <loader v-if="loading" />
   <p class="center" v-else-if="categories.length==0">You dont have any data... <router-link to="/categories">Add new category ?</router-link></p>
 
   <section v-else>
-    <div 
+    <div
     v-for="cat of categories"
     :key="cat.id"
     >
@@ -32,6 +34,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import BarChart from '../components/charts/BarChart'
 export default {
   name: 'planning',
   data: () => ({
@@ -69,6 +72,9 @@ export default {
       }
     })
     this.loading = false
+  },
+  components: {
+    BarChart
   }
 }
 </script>
