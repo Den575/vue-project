@@ -1,29 +1,29 @@
 <template>
-    <div class="col s12 m6 l4">
-      <div class="card light-blue bill-card">
-        <div class="card-content white-text">
-          <span class="card-title">Konto w walucie</span>
+  <div class="col s12 m6 l4">
+    <div class="card light-blue bill-card">
+      <div class="card-content white-text">
+        <span class="card-title">Konto w walucie</span>
 
-          <p 
-          v-for="cur of currencies"
-          :key="cur"
-          class="currency-line">
-            <span>{{getCurrency(cur) | currency(cur)}}</span>
-          </p>
-        </div>
+        <p
+            v-for="cur of currencies"
+            :key="cur"
+            class="currency-line">
+          <span>{{ getCurrency(cur) | currency(cur) }}</span>
+        </p>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
   props: ['rates'],
   data: () => ({
-    currencies: ['PLN','USD','EUR']
+    currencies: ['PLN', 'USD', 'EUR']
   }),
   computed: {
     base() {
-      if(this.$store.getters.info.bill == null){
+      if (this.$store.getters.info.bill == null) {
         console.log('Bill is null');
       }
       return this.$store.getters.info.bill

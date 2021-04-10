@@ -24,16 +24,16 @@ export default {
     const categories = await this.$store.dispatch('fetchCategories')
 
     this.renderChart({
-      labels: categories.map(c=> c.title),
+      labels: categories.map(c => c.title),
       datasets: [{
         label: 'Przychody i wydatki',
-        data: categories.map( c=> {
+        data: categories.map(c => {
           return this.records.reduce((total, r) => {
-            if(r.categoryId === c.id && r.type === this.chartType){
+            if (r.categoryId === c.id && r.type === this.chartType) {
               total += +r.amount
             }
             return total
-          },0)
+          }, 0)
         }),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
