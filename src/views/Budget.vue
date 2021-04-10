@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Planowanie</h3>
+      <h3>Planowanie budżetu</h3>
       <h4>{{ info.bill | currency('PLN') }}</h4>
     </div>
 
@@ -53,9 +53,12 @@ export default {
     this.categories = categories.map(cat => {
       const spend = records
           .filter(r => r.categoryId === cat.id)
-          .filter(r => r.type === 'outcome')
           .reduce((total, record) => {
-            return total += record.amount
+            if (record.type === 'outcome') {
+              return total += record.amount
+            } else if (record.type === 'income') {
+              return total -= record.amount
+            }
           }, 0)
       const percent = 100 * spend / cat.limit
       const progressPercent = percent > 100 ? 100 : percent

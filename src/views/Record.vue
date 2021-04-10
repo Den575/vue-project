@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3></h3>
+      <h3> Nowy rekord </h3>
     </div>
 
     <loader v-if="loading"/>
@@ -31,7 +31,7 @@
               value="income"
               v-model="type"
           />
-          <span>Wpływy</span>
+          <span>Przychód</span>
         </label>
       </p>
 
