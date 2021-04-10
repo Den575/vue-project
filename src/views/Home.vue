@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import HomeBill from '@/components/HomeBill.vue'
-import HomeCurrency from '@/components/HomeCurrency.vue'
+import HomeBill from '@/components/home/HomeBill.vue'
+import HomeCurrency from '@/components/home/HomeCurrency.vue'
 
 
 export default {

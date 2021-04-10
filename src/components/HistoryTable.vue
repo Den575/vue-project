@@ -16,7 +16,7 @@
         :key="record.id">
       <td>{{ idx + 1 }}</td>
       <td>{{ record.amount | currency('PLN') }}</td>
-      <td>{{ record.date }}</td>
+      <td>{{ record.date.replace('T', ' ').slice(0, -5) }}</td>
       <td>{{ record.categoryName }}</td>
       <td>
           <span class="white-text badge"
