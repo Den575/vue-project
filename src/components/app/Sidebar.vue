@@ -22,8 +22,8 @@ export default {
       { title: "Historia", url: "/history" },
       { title: "Budżet", url: "/planning" },
       { title: "Nowy wpis", url: "/record" },
-      { title: "Kategorie", url: "/categories" },
-    ],
-  }),
+      { title: "Kategorie", url: "/categories" }
+    ]
+  })
 };
 </script>

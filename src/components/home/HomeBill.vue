@@ -4,10 +4,7 @@
       <div class="card-content white-text">
         <span class="card-title">Konto w walucie</span>
 
-        <p
-            v-for="cur of currencies"
-            :key="cur"
-            class="currency-line">
+        <p v-for="cur of currencies" :key="cur" class="currency-line">
           <span>{{ getCurrency(cur) | currency(cur) }}</span>
         </p>
       </div>
@@ -17,22 +14,22 @@
 
 <script>
 export default {
-  props: ['rates'],
+  props: ["rates"],
   data: () => ({
-    currencies: ['PLN', 'USD', 'EUR']
+    currencies: ["PLN", "USD", "EUR"]
   }),
   computed: {
     base() {
       if (this.$store.getters.info.bill == null) {
-        console.log('Bill is null');
+        console.log("Bill is null");
       }
-      return this.$store.getters.info.bill
+      return this.$store.getters.info.bill;
     }
   },
   methods: {
     getCurrency(currency) {
-      return Math.floor(this.base * this.rates[currency])
+      return Math.floor(this.base * this.rates[currency]);
     }
   }
-}
+};
 </script>

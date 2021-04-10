@@ -35,10 +35,10 @@ import { required } from "vuelidate/lib/validators";
 
 export default {
   data: () => ({
-    name: "",
+    name: ""
   }),
   validations: {
-    name: { required },
+    name: { required }
   },
   mounted() {
     this.name = this.info.name;
@@ -47,7 +47,7 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(["info"]),
+    ...mapGetters(["info"])
   },
   methods: {
     ...mapActions(["updateInfo"]),
@@ -59,12 +59,12 @@ export default {
 
       try {
         await this.updateInfo({
-          name: this.name,
+          name: this.name
         });
       } catch (e) {
         console.log(e);
       }
-    },
-  },
+    }
+  }
 };
 </script>

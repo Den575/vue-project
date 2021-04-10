@@ -13,7 +13,7 @@
             v-model="title"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-          <label for="name">Nazwa</label>
+          <label for="name">Nazwa kategorii</label>
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -29,12 +29,12 @@
             v-model.number="limit"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-          <label for="limit">Limit</label>
+          <label for="limit">Limit pieniężny</label>
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
           >
-            Min value 1</span
+            Minimalna wartość wynosi 1</span
           >
         </div>
 
@@ -54,11 +54,11 @@ import { required, minValue } from "vuelidate/lib/validators";
 export default {
   data: () => ({
     title: "",
-    limit: 1,
+    limit: 1
   }),
   validations: {
     title: { required },
-    limit: { minValue: minValue(1) },
+    limit: { minValue: minValue(1) }
   },
   mounted() {
     M.updateTextFields();
@@ -72,17 +72,17 @@ export default {
       try {
         const category = await this.$store.dispatch("createCategory", {
           title: this.title,
-          limit: this.limit,
+          limit: this.limit
         });
         this.title = "";
         this.limit = 1;
         this.$v.$reset();
-        M.toast({ html: category.title + " category was created" });
+        M.toast({ html: "Kategoria" + category.title + "została utworzona!" });
         this.$emit("created", category);
       } catch (e) {
         console.log(e);
       }
-    },
-  },
+    }
+  }
 };
 </script>

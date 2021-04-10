@@ -22,7 +22,7 @@
             v-model="title"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-          <label for="name">Nazwa</label>
+          <label for="name">Nazwa kategorii</label>
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -38,12 +38,12 @@
             v-model.number="limit"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-          <label for="limit">Limit</label>
+          <label for="limit">Limit pieniężny</label>
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
           >
-            Min value is 1</span
+            Minimalna wartość wynosi 1</span
           >
         </div>
 
@@ -64,25 +64,25 @@ export default {
   props: {
     categories: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data: () => ({
     select: null,
     title: "",
     limit: 1,
-    current: null,
+    current: null
   }),
   validations: {
     title: { required },
-    limit: { minValue: minValue(1) },
+    limit: { minValue: minValue(1) }
   },
   watch: {
     current(catId) {
-      const { title, limit } = this.categories.find((c) => c.id === catId);
+      const { title, limit } = this.categories.find(c => c.id === catId);
       this.title = title;
       this.limit = limit;
-    },
+    }
   },
   created() {
     const { id, title, limit } = this.categories[0];
@@ -105,7 +105,7 @@ export default {
         const categoryData = {
           id: this.current,
           title: this.title,
-          limit: this.limit,
+          limit: this.limit
         };
         await this.$store.dispatch("updateCategory", categoryData);
         M.toast({ html: categoryData.title + " category was updated" });
@@ -113,12 +113,12 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    },
+    }
   },
   destroyed() {
     if (this.select && this.select.destroy) {
       this.select.destroy;
     }
-  },
+  }
 };
 </script>

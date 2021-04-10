@@ -7,20 +7,19 @@
         </div>
         <table>
           <thead>
-          <tr>
-            <th>Waluta</th>
-            <th>Kurs</th>
-            <th>Data</th>
-          </tr>
+            <tr>
+              <th>Waluta</th>
+              <th>Kurs</th>
+              <th>Data</th>
+            </tr>
           </thead>
 
           <tbody>
-          <tr v-for="cur in currencies"
-              :key="cur">
-            <td>{{ cur }}</td>
-            <td>{{ rates[cur].toFixed(2) }}</td>
-            <td>{{ date }}</td>
-          </tr>
+            <tr v-for="cur in currencies" :key="cur">
+              <td>{{ cur }}</td>
+              <td>{{ rates[cur].toFixed(2) }}</td>
+              <td>{{ date }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -29,10 +28,10 @@
 </template>
 
 <script>
-export default ({
-  props: ['rates', 'date'],
+export default {
+  props: ["rates", "date"],
   data: () => ({
-    currencies: ['PLN', 'USD', 'EUR']
+    currencies: ["PLN", "USD", "EUR"]
   })
-})
+};
 </script>

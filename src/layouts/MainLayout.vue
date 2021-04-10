@@ -30,7 +30,7 @@ export default {
   name: "main-layout",
   data: () => ({
     isOpen: true,
-    loading: true,
+    loading: true
   }),
   async mounted() {
     if (!Object.keys(this.$store.getters.info).length) {
@@ -41,18 +41,18 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    Loader,
+    Loader
   },
   computed: {
     error() {
       return this.$store.getters.error;
-    },
+    }
   },
   watch: {
     error(fbError) {
       console.log(fbError);
       M.toast({ html: fbError.message });
-    },
-  },
+    }
+  }
 };
 </script>

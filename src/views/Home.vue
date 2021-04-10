@@ -9,47 +9,41 @@
         </button>
       </div>
 
-
-      <loader v-if="loading"/>
+      <loader v-if="loading" />
 
       <div v-else class="row">
-
-        <HomeBill
-            :rates="currency.rates"/>
-        <HomeCurrency
-            :rates="currency.rates"
-            :date="currency.date"/>
-
+        <HomeBill :rates="currency.rates" />
+        <HomeCurrency :rates="currency.rates" :date="currency.date" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HomeBill from '@/components/home/HomeBill.vue'
-import HomeCurrency from '@/components/home/HomeCurrency.vue'
-
+import HomeBill from "@/components/home/HomeBill.vue";
+import HomeCurrency from "@/components/home/HomeCurrency.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   data: () => ({
     loading: true,
     currency: null
   }),
   async mounted() {
-    this.currency = await this.$store.dispatch('fetchCurrency')
+    this.currency = await this.$store.dispatch("fetchCurrency");
     console.log(this.currency);
-    this.loading = false
+    this.loading = false;
   },
   methods: {
     async refresh() {
-      this.loading = true,
-          this.currency = await this.$store.dispatch('fetchCurrency')
-      this.loading = false
+      (this.loading = true),
+        (this.currency = await this.$store.dispatch("fetchCurrency"));
+      this.loading = false;
     }
   },
   components: {
-    HomeBill, HomeCurrency
+    HomeBill,
+    HomeCurrency
   }
-}
+};
 </script>

@@ -52,12 +52,12 @@
           v-model.number="amount"
           :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
         />
-        <label for="amount">Suma</label>
+        <label for="amount">Kwota</label>
         <span
           v-if="$v.amount.$dirty && !$v.amount.minValue"
           class="helper-text invalid"
         >
-          Min value is 1
+          Minimalna wartość wynosi 1
         </span>
       </div>
 
@@ -67,7 +67,7 @@
           type="text"
           v-model="description"
           :class="{
-            invalid: $v.description.$dirty && !$v.description.required,
+            invalid: $v.description.$dirty && !$v.description.required
           }"
         />
         <label for="description">Opis</label>
@@ -101,7 +101,7 @@ export default {
     type: "outcome",
     amount: 1,
     category: null,
-    description: "",
+    description: ""
   }),
   computed: {
     ...mapGetters(["info"]),
@@ -111,7 +111,7 @@ export default {
       } else {
         return this.info.bill >= this.amount;
       }
-    },
+    }
   },
   methods: {
     async handelSubmit() {
@@ -127,7 +127,7 @@ export default {
             amount: this.amount,
             description: this.description,
             type: this.type,
-            date: new Date().toJSON(),
+            date: new Date().toJSON()
           });
           const bill =
             this.type === "income"
@@ -135,7 +135,7 @@ export default {
               : this.info.bill - this.amount;
 
           await this.$store.dispatch("updateInfo", { bill });
-          M.toast({ html: "Sukces" });
+          M.toast({ html: "Dodano wpis!" });
           this.$v.$reset();
           this.amount = 1;
           this.description = "";
@@ -144,16 +144,15 @@ export default {
         }
       } else {
         M.toast({
-          html: `Niewystarczająca ilość pieniędzy: -${
-            this.amount - this.info.bill
-          } :(`,
+          html: `Niewystarczająca ilość pieniędzy: -${this.amount -
+            this.info.bill}`
         });
       }
-    },
+    }
   },
   validations: {
     amount: { minValue: minValue(1) },
-    description: { required },
+    description: { required }
   },
   async mounted() {
     this.categories = await this.$store.dispatch("fetchCategories");
@@ -170,6 +169,6 @@ export default {
     if (this.select && this.select.destroy) {
       this.select.destroy;
     }
-  },
+  }
 };
 </script>
