@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import CategoryCreate from "../components/CategoryCreate";
-import CategoryEdit from "../components/CategoryEdit";
+import CategoryCreate from "../components/category/CategoryCreate";
+import CategoryEdit from "../components/category/CategoryEdit";
 
 export default {
   name: "categories",

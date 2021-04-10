@@ -1,33 +1,33 @@
 <template>
   <div>
     <div>
-  <div class="page-title">
-    <h3>Konto</h3>
+      <div class="page-title">
+        <h3>Konto</h3>
 
-    <button class="btn waves-effect waves-light btn-small">
-      <i class="material-icons" @click="refresh">refresh</i>
-    </button>
-  </div>
+        <button class="btn waves-effect waves-light btn-small">
+          <i class="material-icons" @click="refresh">refresh</i>
+        </button>
+      </div>
 
 
-  <loader v-if="loading" />
+      <loader v-if="loading"/>
 
-  <div v-else class="row">
+      <div v-else class="row">
 
-    <HomeBill 
-    :rates="currency.rates"/>
-    <HomeCurrency 
-    :rates="currency.rates"
-    :date="currency.date"/>
-    
-  </div>
-</div>
+        <HomeBill
+            :rates="currency.rates"/>
+        <HomeCurrency
+            :rates="currency.rates"
+            :date="currency.date"/>
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HomeBill from '@/components/HomeBill.vue'
-import HomeCurrency from '@/components/HomeCurrency.vue'
+import HomeBill from '@/components/home/HomeBill.vue'
+import HomeCurrency from '@/components/home/HomeCurrency.vue'
 
 
 export default {
@@ -44,7 +44,7 @@ export default {
   methods: {
     async refresh() {
       this.loading = true,
-      this.currency = await this.$store.dispatch('fetchCurrency')
+          this.currency = await this.$store.dispatch('fetchCurrency')
       this.loading = false
     }
   },

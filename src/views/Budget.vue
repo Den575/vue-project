@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Planowanie</h3>
-      <h4>{{ info.bill | currency("PLN") }}</h4>
+      <h3>Planowanie budżetu</h3>
+      <h4>{{ info.bill | currency('PLN') }}</h4>
     </div>
+
+    <BarChart/>
 
     <loader v-if="loading" />
     <p class="center" v-else-if="categories.length == 0">
@@ -30,6 +32,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import BarChart from '../components/charts/BarChart'
+
 export default {
   name: "planning",
   data: () => ({
@@ -44,26 +48,35 @@ export default {
     const categories = await this.$store.dispatch("fetchCategories");
     this.categories = categories.map((cat) => {
       const spend = records
-        .filter((r) => r.categoryId === cat.id)
-        .filter((r) => r.type === "outcome")
-        .reduce((total, record) => {
-          return (total += record.amount);
-        }, 0);
-      const percent = (100 * spend) / cat.limit;
-      const progressPercent = percent > 100 ? 100 : percent;
-      const progressColor =
-        percent < 60 ? "green" : percent < 100 ? "yellow" : "red";
+          .filter(r => r.categoryId === cat.id)
+          .reduce((total, record) => {
+            if (record.type === 'outcome') {
+              return total += record.amount
+            } else if (record.type === 'income') {
+              return total -= record.amount
+            }
+          }, 0)
+      const percent = 100 * spend / cat.limit
+      const progressPercent = percent > 100 ? 100 : percent
+      const progressColor = percent < 60
+          ? 'green'
+          : percent < 100
+              ? 'yellow'
+              : 'red'
 
-      console.log("Color: " + progressPercent);
+      console.log('Color: ' + progressPercent);
 
       return {
         ...cat,
         progressPercent,
         progressColor,
-        spend,
-      };
-    });
-    this.loading = false;
+        spend
+      }
+    })
+    this.loading = false
   },
-};
+  components: {
+    BarChart
+  }
+}
 </script>

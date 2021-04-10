@@ -8,27 +8,27 @@ import record from './record'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    error: null
-  },
-  mutations: {
-    setError(state, error){
-      state.error = error
+    state: {
+        error: null
     },
-    clearError(state){
-      state.error = null
+    mutations: {
+        setError(state, error) {
+            state.error = error
+        },
+        clearError(state) {
+            state.error = null
+        }
+    },
+    actions: {
+        async fetchCurrency() {
+            const res = await fetch(`https://api.exchangeratesapi.io/latest?symbols=USD%2CEUR%2CPLN&base=PLN`)
+            return await res.json()
+        }
+    },
+    getters: {
+        error: s => s.error
+    },
+    modules: {
+        auth, info, category, record
     }
-  },
-  actions: {
-    async fetchCurrency() {
-      const res = await fetch(`https://api.exchangeratesapi.io/latest?symbols=USD%2CEUR%2CPLN&base=PLN`)
-      return await res.json()
-    }
-  },
-  getters: {
-    error: s => s.error
-  },
-  modules: {
-    auth, info, category, record
-  }
 })

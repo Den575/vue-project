@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 export default {
-    data () {
+    data() {
         return {
             page: 1,
             pageSize: 5,
@@ -18,7 +18,7 @@ export default {
 
         },
         pageChangeHandler(page) {
-            
+
             this.items = this.allItems[page - 1] || this.allItems[0]
         }
     }
