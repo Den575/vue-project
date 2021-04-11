@@ -25,8 +25,8 @@
       <paginate
         :page-count="pageCount"
         :click-handler="pageChangeHandler"
-        :prev-text="'Poprzednia strona'"
-        :next-text="'Kolejna strona'"
+        :prev-text="'Poprzednia'"
+        :next-text="'Kolejna'"
         :container-class="'pagination'"
         :page-class="'waves-effect'"
         v-model="page"

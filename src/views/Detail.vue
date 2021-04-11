@@ -4,7 +4,7 @@
 
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
-        <router-link to="/history" class="breadcrumb">Historia</router-link>
+        <router-link to="/" class="breadcrumb">Historia</router-link>
         <a @click.prevent class="breadcrumb">
           {{ record.type === "income" ? "Przychody" : "Wydatki" }}
         </a>

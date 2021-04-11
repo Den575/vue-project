@@ -18,8 +18,7 @@ export default {
   props: ["value"],
   data: () => ({
     links: [
-      { title: "Stan Konta", url: "/", exact: true },
-      { title: "Historia", url: "/history" },
+      { title: "Historia", url: "/", exact: true },
       { title: "Budżet", url: "/planning" },
       { title: "Nowy wpis", url: "/record" },
       { title: "Kategorie", url: "/categories" }

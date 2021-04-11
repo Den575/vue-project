@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Categories from "../views/Categories.vue";
 import Detail from "../views/Detail.vue";
@@ -16,9 +15,9 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "History",
     meta: { layout: "main", auth: true },
-    component: Home
+    component: History
   },
   {
     path: "/login",
@@ -31,12 +30,6 @@ const routes = [
     name: "register",
     meta: { layout: "empty" },
     component: Register
-  },
-  {
-    path: "/history",
-    name: "history",
-    meta: { layout: "main", auth: true },
-    component: History
   },
   {
     path: "/record",
