@@ -108,7 +108,9 @@ export default {
           limit: this.limit
         };
         await this.$store.dispatch("updateCategory", categoryData);
-        M.toast({ html: categoryData.title + " category was updated" });
+        M.toast({
+          html: "Kategoria " + categoryData.title + " została zaktualizowana!"
+        });
         this.$emit("updated", categoryData);
       } catch (e) {
         console.log(e);

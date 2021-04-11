@@ -74,7 +74,6 @@
 </template>
 
 <script>
-/*global M*/
 import { email, required, minLength } from "vuelidate/lib/validators";
 
 export default {
@@ -86,11 +85,6 @@ export default {
   validations: {
     email: { email, required },
     password: { required, minLength: minLength(5) }
-  },
-  mounted() {
-    if (this.$route.query.message == "logout") {
-      M.toast({ html: "Wylogowano Cię!" });
-    }
   },
   methods: {
     async submitHandler() {
