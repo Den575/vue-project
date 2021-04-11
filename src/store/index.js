@@ -6,6 +6,7 @@ import category from "./category";
 import record from "./record";
 
 Vue.use(Vuex);
+Vue.config.devtools = true;
 
 export default new Vuex.Store({
   state: {

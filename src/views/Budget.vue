@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h3>Planowanie budżetu</h3>
-      <h4>{{ info.bill | currency("PLN") }}</h4>
+      <h4>Bilans: {{ info.bill | currency("PLN") }}</h4>
     </div>
 
     <loader v-if="loading" />
