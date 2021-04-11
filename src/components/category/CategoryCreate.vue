@@ -77,7 +77,9 @@ export default {
         this.title = "";
         this.limit = 1;
         this.$v.$reset();
-        M.toast({ html: "Kategoria" + category.title + "została utworzona!" });
+        M.toast({
+          html: "Kategoria " + category.title + " została utworzona!"
+        });
         this.$emit("created", category);
       } catch (e) {
         console.log(e);

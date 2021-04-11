@@ -22,12 +22,12 @@
         <small
           class="helper-text invalid"
           v-if="$v.email.$dirty && !$v.email.required"
-          >Please enter e-mail</small
+          >E-mail wymagany</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.email.$dirty && !$v.email.email"
-          >Please enter valid e-mail address</small
+          >E-mail powinien mieć postać example@example.com</small
         >
       </div>
       <div class="input-field">
@@ -45,12 +45,13 @@
         <small
           class="helper-text invalid"
           v-if="$v.password.$dirty && !$v.password.required"
-          >Enter password</small
+          >Hasło wymagane</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.password.$dirty && !$v.password.minLength"
-          >Min length of password is 5. Now is {{ password.length }}</small
+          >Hasło powinno mieć więcej niż 5 znaków. Długość teraz:
+          {{ password.length }}</small
         >
       </div>
     </div>

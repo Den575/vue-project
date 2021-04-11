@@ -1,7 +1,26 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title center">MoneySave</span>
+      <span class="card-title center teal-text login-text"
+        >Finance Manager</span
+      >
+      <p class="card-content center black-text">
+        Zestawienie Twoich wydatków i przychodów w jednym miejscu!
+      </p>
+      <div class="input-field">
+        <input
+          id="name"
+          type="text"
+          v-model.trim="name"
+          :class="{ invalid: $v.name.$dirty && !$v.name.required }"
+        />
+        <label for="name">Imię</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.name.$dirty && !$v.name.required"
+          >Imię wymagane</small
+        >
+      </div>
       <div class="input-field">
         <input
           id="email"
@@ -17,12 +36,12 @@
         <small
           class="helper-text invalid"
           v-if="$v.email.$dirty && !$v.email.required"
-          >Please enter e-mail</small
+          >E-mail wymagany</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.email.$dirty && !$v.email.email"
-          >Please enter valid e-mail address</small
+          >E-mail powinien mieć postać example@example.com</small
         >
       </div>
       <div class="input-field">
@@ -40,32 +59,19 @@
         <small
           class="helper-text invalid"
           v-if="$v.password.$dirty && !$v.password.required"
-          >Enter password</small
+          >Hasło wymagane</small
         >
         <small
           class="helper-text invalid"
           v-else-if="$v.password.$dirty && !$v.password.minLength"
-          >Min length of password is 5. Now is {{ password.length }}</small
-        >
-      </div>
-      <div class="input-field">
-        <input
-          id="name"
-          type="text"
-          v-model.trim="name"
-          :class="{ invalid: $v.name.$dirty && !$v.name.required }"
-        />
-        <label for="name">Imię</label>
-        <small
-          class="helper-text invalid"
-          v-if="$v.name.$dirty && !$v.name.required"
-          >Enter name</small
+          >Hasło powinno mieć min. 5 znaków. Długość teraz:
+          {{ password.length }}</small
         >
       </div>
       <p>
         <label>
-          <input type="checkbox" v-model="agree" />
-          <span>Zapoznałem się z reglaminem</span>
+          <input type="checkbox" v-model="agree" required />
+          <span>Akceptuję regulamin</span>
         </label>
       </p>
     </div>
@@ -83,7 +89,9 @@
 
       <p class="center">
         Masz konto?
-        <router-link to="/login">Zaloguj się!</router-link>
+        <router-link to="/login"
+          ><span class="teal-text">Zaloguj się</span></router-link
+        >
       </p>
     </div>
   </form>

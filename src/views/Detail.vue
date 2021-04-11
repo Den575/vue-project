@@ -23,7 +23,7 @@
               <p>Kwota: {{ record.amount }} PLN</p>
               <p>Kategoria: {{ record.categoryName }}</p>
 
-              <small>{{ new Date(record.date).toLocaleString("en-GB") }}</small>
+              <small>{{ new Date(record.date).toLocaleString("pl") }}</small>
             </div>
           </div>
         </div>

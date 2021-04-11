@@ -31,8 +31,8 @@ export default {
               return total;
             }, 0);
           }),
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgba(204, 0, 0, 2)",
+          backgroundColor: "rgba(204, 0, 0, 0.9)",
           borderWidth: 1
         },
         {
@@ -45,8 +45,8 @@ export default {
               return total;
             }, 0);
           }),
-          borderColor: "rgba(75, 192, 192, 1)",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(0, 112, 0, 1)",
+          backgroundColor: "rgba(0, 112, 0, 0.9)",
           borderWidth: 1
         }
       ]

@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import { Pie } from "vue-chartjs";
+import { Doughnut } from "vue-chartjs";
 
 export default {
-  name: "pieChart",
-  extends: Pie,
+  name: "doughnutChart",
+  extends: Doughnut,
   props: {
     chartType: {
       type: String
@@ -37,20 +37,20 @@ export default {
             }, 0);
           }),
           backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)"
+            "rgba(0, 82, 155, 0.9)",
+            "rgba(0, 124, 195, 0.9)",
+            "rgba(122, 193, 66, 0.9)",
+            "rgba(55, 123, 43, 0.9)",
+            "rgba(253, 187, 47, 0.9)",
+            "rgba(244, 122, 31, 0.9)"
           ],
           borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)"
+            "rgba(0, 82, 155, 1)",
+            "rgba(0, 124, 195, 1)",
+            "rgba(122, 193, 66, 1)",
+            "rgba(55, 123, 43, 1)",
+            "rgba(253, 187, 47, 1)",
+            "rgba(244, 122, 31, 1)"
           ],
           borderWidth: 1
         }

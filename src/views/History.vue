@@ -11,14 +11,20 @@
       <router-link to="/record">Dodaj nowy wpis</router-link>
     </p>
     <section v-else>
-      <div v-if="records.length > 1">
-        <h5>Wydatki</h5>
-        <PieChart chartType="outcome" />
+      <div
+        style="height: 360px; width: 45%;display:inline-block;"
+        v-if="records.length > 1"
+      >
+        <h5 class="center">Wydatki</h5>
+        <DonutChart chartType="outcome" />
       </div>
 
-      <div v-if="records.length > 1">
-        <h5>Przychody</h5>
-        <PieChart chartType="income" />
+      <div
+        style="height: 360px; width: 45%;display:inline-block;"
+        v-if="records.length > 1"
+      >
+        <h5 class="center">Przychody</h5>
+        <DonutChart chartType="income" />
       </div>
 
       <HistoryTable :records="items" />
@@ -38,7 +44,7 @@
 <script>
 import HistoryTable from "../components/HistoryTable";
 import paginationMixin from "../mixsins/pagination.mixin";
-import PieChart from "../components/charts/PieChart";
+import DonutChart from "../components/charts/DonutChart";
 
 export default {
   name: "history",
@@ -72,7 +78,7 @@ export default {
   },
   components: {
     HistoryTable,
-    PieChart
+    DonutChart
   }
 };
 </script>

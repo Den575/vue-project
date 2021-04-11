@@ -15,7 +15,7 @@
       <tr v-for="(record, idx) of records" :key="record.id">
         <td>{{ idx + 1 }}</td>
         <td>{{ record.amount | currency("PLN") }}</td>
-        <td>{{ new Date(record.date).toLocaleString("en-GB") }}</td>
+        <td>{{ new Date(record.date).toLocaleString("pl") }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
           <span class="white-text badge" :class="[record.typeClass]">{{
