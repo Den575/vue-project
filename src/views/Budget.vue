@@ -49,13 +49,11 @@ export default {
     this.categories = categories.map(cat => {
       const spend = records
         .filter(r => r.categoryId === cat.id)
+        .filter(r => r.type === "outcome")
         .reduce((total, record) => {
-          if (record.type === "outcome") {
-            return (total += record.amount);
-          } else if (record.type === "income") {
-            return (total -= record.amount);
-          }
+          return (total += record.amount);
         }, 0);
+
       const percent = (100 * spend) / cat.limit;
       const progressPercent = percent > 100 ? 100 : percent;
       const progressColor =
