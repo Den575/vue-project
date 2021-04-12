@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Historia</h3>
+      <h3>Historia wpisów</h3>
     </div>
 
     <loader v-if="loading" />
@@ -11,18 +11,12 @@
       <router-link to="/record">Dodaj nowy wpis</router-link>
     </p>
     <section v-else>
-      <div
-        style="height: 360px; width: 45%;display:inline-block;"
-        v-if="records.length > 1"
-      >
+      <div class="donut-chart" v-if="records.length > 1">
         <h5 class="center">Wydatki</h5>
         <DonutChart chartType="outcome" />
       </div>
 
-      <div
-        style="height: 360px; width: 45%;display:inline-block;"
-        v-if="records.length > 1"
-      >
+      <div class="donut-chart" v-if="records.length > 1">
         <h5 class="center">Przychody</h5>
         <DonutChart chartType="income" />
       </div>

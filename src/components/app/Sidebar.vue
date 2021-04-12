@@ -21,7 +21,7 @@ export default {
       { title: "Historia", url: "/", exact: true },
       { title: "Budżet", url: "/planning" },
       { title: "Dodaj wpis", url: "/record" },
-      { title: "Kategorie", url: "/categories" }
+      { title: "Zarządzaj kategoriami", url: "/categories" }
     ]
   })
 };
