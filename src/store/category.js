@@ -38,6 +38,19 @@ export default {
         throw e;
       }
     },
+    async createCategories({ dispatch, commit }, { categories }) {
+      try {
+        for (const category of categories) {
+          await dispatch("createCategory", {
+            title: category.title,
+            limit: category.limit
+          });
+        }
+      } catch (e) {
+        commit("setError", e);
+        throw e;
+      }
+    },
     async createCategory({ commit, dispatch }, { title, limit }) {
       try {
         const uid = await dispatch("getUid");

@@ -2,6 +2,16 @@ import firebase from "firebase/app";
 
 export default {
   actions: {
+    async createRecords({ dispatch, commit }, { records }) {
+      try {
+        for (const record of records) {
+          await dispatch("createRecord", record);
+        }
+      } catch (e) {
+        commit("setError", e);
+        throw e;
+      }
+    },
     async createRecord({ dispatch, commit }, record) {
       try {
         const uid = await dispatch("getUid");
