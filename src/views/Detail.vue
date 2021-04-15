@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <p class="center" v-else>No data...</p>
+    <p class="center" v-else>Pusto...</p>
   </div>
 </template>
 

@@ -46,23 +46,19 @@ export default {
   async mounted() {
     const records = await this.$store.dispatch("fetchRecords");
     const categories = await this.$store.dispatch("fetchCategories");
-    this.categories = categories.map(cat => {
+    this.categories = categories.map(category => {
       const spend = records
-        .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === "outcome")
+        .filter(r => r.categoryId === category.id)
         .reduce((total, record) => {
           return (total += record.amount);
         }, 0);
-
-      const percent = (100 * spend) / cat.limit;
+      const percent = (100 * spend) / category.limit;
       const progressPercent = percent > 100 ? 100 : percent;
       const progressColor =
-        percent < 60 ? "green" : percent < 100 ? "yellow" : "red";
-
-      console.log("Color: " + progressPercent);
+        percent < 60 ? "green" : percent < 100 ? "orange" : "red";
 
       return {
-        ...cat,
+        ...category,
         progressPercent,
         progressColor,
         spend

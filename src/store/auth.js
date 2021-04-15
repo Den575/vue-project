@@ -4,6 +4,8 @@ import {
   fetchMockarooRecords
 } from "../utils/mockaroo";
 import _ from "lodash";
+import { lorem } from "../utils/descriptionGenerator";
+import { randomDate } from "../utils/dateGenerator";
 
 export default {
   actions: {
@@ -29,12 +31,11 @@ export default {
         const categoriesIds = categoriesWithId.map(category => category.id);
 
         const records = await fetchMockarooRecords();
-        // TODO: change description during autogeneration
         const recordsToSave = records.map(r => ({
           ...r,
           categoryId: _.sample(categoriesIds),
-          date: new Date().toJSON(),
-          description: "ABC"
+          date: randomDate(new Date(2020, 0, 1), new Date()).toJSON(),
+          description: lorem.generateSentences(1)
         }));
         console.log("#register - records", recordsToSave);
         await dispatch("createRecords", { records: recordsToSave });

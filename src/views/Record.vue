@@ -9,7 +9,7 @@
       Pusto... <router-link to="/categories">Dodaj nową kategorię</router-link>
     </p>
 
-    <form class="form" v-else @submit.prevent="handelSubmit">
+    <form class="form" v-else @submit.prevent="handleSubmit">
       <div class="input-field">
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
@@ -105,7 +105,7 @@ export default {
   }),
   computed: {
     ...mapGetters(["info"]),
-    CanCreateRecord() {
+    canCreateRecord() {
       if (this.type === "income") {
         return true;
       } else {
@@ -114,13 +114,13 @@ export default {
     }
   },
   methods: {
-    async handelSubmit() {
+    async handleSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
 
-      if (this.CanCreateRecord) {
+      if (this.canCreateRecord) {
         try {
           await this.$store.dispatch("createRecord", {
             categoryId: this.category,
