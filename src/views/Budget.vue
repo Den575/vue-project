@@ -7,7 +7,8 @@
 
     <loader v-if="loading" />
     <p class="center" v-else-if="categories.length == 0">
-      Pusto... <router-link to="/categories">Dodaj nową kategorię</router-link>
+      Pusto...
+      <router-link to="/categories">Dodaj nową kategorię</router-link>
     </p>
 
     <section v-else>
@@ -49,6 +50,7 @@ export default {
     this.categories = categories.map(category => {
       const spend = records
         .filter(r => r.categoryId === category.id)
+        .filter(r => r.type === "outcome")
         .reduce((total, record) => {
           return (total += record.amount);
         }, 0);

@@ -6,6 +6,7 @@ import {
 import _ from "lodash";
 import { lorem } from "../utils/descriptionGenerator";
 import { randomDate } from "../utils/dateGenerator";
+import { reduceRecords, reduceRecords2 } from "@/utils/reduceRecords";
 
 export default {
   actions: {
@@ -24,11 +25,11 @@ export default {
         const uid = await dispatch("getUid");
 
         const categories = await fetchMockarooCategories();
-        console.log("#register - categories", categories);
         await dispatch("createCategories", { categories });
 
         const categoriesWithId = await dispatch("fetchCategories");
         const categoriesIds = categoriesWithId.map(category => category.id);
+        console.log("#register - categories", categoriesWithId);
 
         const records = await fetchMockarooRecords();
         const recordsToSave = records.map(r => ({
@@ -40,16 +41,35 @@ export default {
         console.log("#register - records", recordsToSave);
         await dispatch("createRecords", { records: recordsToSave });
 
-        const calculatedValue = records.reduce((total, record) => {
-          if (record.type === "income") {
-            total += record.amount;
-          } else if (record.type === "outcome") {
-            total -= record.amount;
-          }
-          return total;
-        }, 0);
+        const updatedCategories = categoriesWithId.map(category => {
+          console.log("@@@@@@@", category);
 
-        console.log("#register - records value", calculatedValue);
+          const categoryCosts = reduceRecords2(recordsToSave)(
+            category.id,
+            "outcome"
+          );
+
+          const defaultLimit = 2500;
+
+          const categoryLimitToStartWith =
+            categoryCosts < defaultLimit ? defaultLimit : categoryCosts + 1500;
+
+          return {
+            id: category.id,
+            title: category.title,
+            limit: categoryLimitToStartWith
+          };
+        });
+
+        console.log("#updated", updatedCategories);
+        updatedCategories.forEach(
+          async updatedCategory =>
+            await dispatch("updateCategory", updatedCategory)
+        );
+
+        const calculatedValue = records.reduce(reduceRecords, 0);
+
+        console.log("#register - bill", calculatedValue);
 
         const billToStartWith =
           calculatedValue > 0
