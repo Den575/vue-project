@@ -1,34 +1,40 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import auth from './auth'
-import info from './info'
-import category from './category'
-import record from './record'
+import Vue from "vue";
+import Vuex from "vuex";
+import auth from "./auth";
+import info from "./info";
+import category from "./category";
+import record from "./record";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+Vue.config.devtools = true;
 
 export default new Vuex.Store({
   state: {
     error: null
   },
   mutations: {
-    setError(state, error){
-      state.error = error
+    setError(state, error) {
+      state.error = error;
     },
-    clearError(state){
-      state.error = null
+    clearError(state) {
+      state.error = null;
     }
   },
   actions: {
     async fetchCurrency() {
-      const res = await fetch(`https://api.exchangeratesapi.io/latest?symbols=USD%2CEUR%2CPLN&base=PLN`)
-      return await res.json()
+      const res = await fetch(
+        `https://api.exchangeratesapi.io/latest?symbols=USD%2CEUR%2CPLN&base=PLN`
+      );
+      return await res.json();
     }
   },
   getters: {
     error: s => s.error
   },
   modules: {
-    auth, info, category, record
+    auth,
+    info,
+    category,
+    record
   }
-})
+});

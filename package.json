@@ -1,17 +1,21 @@
 {
-  "name": "vue-youtube",
-  "version": "0.1.0",
+  "name": "vue-uek-project",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service lint -- --fix ",
+    "prettier:check": "cross-env prettier --check src/**",
+    "prettier:write": "cross-env prettier --write src/**"
   },
   "dependencies": {
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "firebase": "^8.3.0",
     "lodash": "^4.17.21",
+    "lorem-ipsum": "^2.0.3",
     "materialize-css": "^1.0.0-rc.2",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
@@ -29,10 +33,20 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^6.0.0",
     "node-sass": "^4.12.0",
+    "pretty-quick": "^3.1.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cross-env pretty-quick --staged"
+    }
   }
 }

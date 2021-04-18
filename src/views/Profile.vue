@@ -1,69 +1,70 @@
 <template>
-    <div>
-  <div class="page-title">
-    <h3>Konto</h3>
-  </div>
+  <div>
+    <div class="page-title">
+      <h3>Edytuj profil</h3>
+    </div>
 
-  <form class="form" @submit.prevent="submitHandler">
-    <div class="input-field">
-      <input
+    <form class="form" @submit.prevent="submitHandler">
+      <div class="input-field">
+        <input
           id="description"
           type="text"
           v-model="name"
-          :class="{invalid: $v.name.$dirty && !$v.name.required}"
-      >
-      <label for="description">Imię</label>
-      <small class="helper-text invalid"
-      v-if="$v.name.$dirty && !$v.name.required"
-      >Please enter name</small>
-    </div>
+          :class="{ invalid: $v.name.$dirty && !$v.name.required }"
+        />
+        <label for="description">Imię</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.name.$dirty && !$v.name.required"
+          >Please enter name</small
+        >
+      </div>
 
-    <button class="btn waves-effect waves-light" type="submit">
-      ZAktualizuj
-      <i class="material-icons right">send</i>
-    </button>
-  </form>
-</div>
+      <button class="btn waves-effect waves-light" type="submit">
+        WYŚLIJ
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
 /*global M*/
-import {mapGetters, mapActions} from 'vuex'
-import {required} from 'vuelidate/lib/validators'
+import { mapGetters, mapActions } from "vuex";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   data: () => ({
-     name: ''
+    name: ""
   }),
-  validations:{
-    name: {required}
+  validations: {
+    name: { required }
   },
   mounted() {
-    this.name = this.info.name
+    this.name = this.info.name;
     setTimeout(() => {
-      M.updateTextFields()
-    }) 
+      M.updateTextFields();
+    });
   },
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(["info"])
   },
   methods: {
-    ...mapActions(['updateInfo']),
+    ...mapActions(["updateInfo"]),
     async submitHandler() {
       if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
+        this.$v.$touch();
+        return;
       }
 
-    try{
-      await this.updateInfo({
-        name: this.name
-      })
-    }
-    catch (e){
-      console.log(e);
-    }
+      try {
+        await this.updateInfo({
+          name: this.name
+        });
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
-}
+};
 </script>

@@ -1,98 +1,78 @@
 <template>
-    <div>
-  <div class="page-title">
-    <h3>Historia</h3>
-  </div>
+  <div>
+    <div class="page-title">
+      <h3>Historia wpisów</h3>
+    </div>
 
-  <div class="history-chart">
-    <canvas ref="canvas"></canvas>
-  </div>
+    <loader v-if="loading" />
 
-  <loader v-if="loading"/>
-
- <p class="center" v-else-if="!records.length">
-      Jeszcze nic nie ma...
-      <router-link to="/record">Dodaj nowy</router-link>
+    <p class="center" v-else-if="!records.length">
+      Pusto...
+      <router-link to="/record">Dodaj nowy wpis</router-link>
     </p>
-  <section v-else>
-    <HistoryTable :records="items"/>
-    <paginate :page-count="pageCount"
-  :click-handler="pageChangeHandler"
-  :prev-text="'Poprzednia strona'"
-  :next-text="'Kolejna strona'"
-  :container-class="'pagination'"
-  :page-class="'waves-effect'"
-  v-model="page"/>
-  </section>
-</div>
+    <section v-else>
+      <div class="donut-chart" v-if="records.length > 1">
+        <h5 class="center">Wydatki</h5>
+        <DonutChart chartType="outcome" />
+      </div>
+
+      <div class="donut-chart" v-if="records.length > 1">
+        <h5 class="center">Przychody</h5>
+        <DonutChart chartType="income" />
+      </div>
+
+      <HistoryTable :records="items" />
+      <paginate
+        :page-count="pageCount"
+        :click-handler="pageChangeHandler"
+        :prev-text="'Poprzednia'"
+        :next-text="'Kolejna'"
+        :container-class="'pagination'"
+        :page-class="'waves-effect'"
+        v-model="page"
+      />
+    </section>
+  </div>
 </template>
 
 <script>
-import HistoryTable from '../components/HistoryTable'
-import paginationMixin from '../mixsins/pagination.mixin' 
-import {Pie} from 'vue-chartjs'
+import HistoryTable from "../components/HistoryTable";
+import paginationMixin from "../mixsins/pagination.mixin";
+import DonutChart from "../components/charts/DonutChart";
 
 export default {
-  name: 'history',
+  name: "history",
   mixins: [paginationMixin],
-  extends: Pie,
   data: () => ({
     loading: true,
     records: []
   }),
   async mounted() {
-    this.records = await this.$store.dispatch('fetchRecords')
-    const categories = await this.$store.dispatch('fetchCategories')
-    
-    this.setup(categories)
-    
-    this.renderChart({
-        labels: categories.map(c=> c.title),
-        datasets: [{
-            label: 'Przychody i wydatki',
-            data: categories.map( c=> {
-              return this.records.reduce((total, r) => {
-                if(r.categoryId === c.id && r.type === 'outcome'){
-                  total += +r.amount
-                }
-                return total
-              },0)
-            }),
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    })
-    this.loading = false
+    this.records = await this.$store.dispatch("fetchRecords");
+    const categories = await this.$store.dispatch("fetchCategories");
+
+    this.setup(categories);
+
+    this.loading = false;
   },
   methods: {
     setup(categories) {
-      this.setupPagination(this.records = this.records.map(record => {
-      return {
-        ...record,
-        categoryName: categories.find(c => c.id === record.categoryId).title,
-        typeClass: record.type === 'income' ? 'green' : 'red',
-        typeText: record.type === 'income' ? 'Przychody' : 'Wydatki'
-      }
-    }))
+      this.setupPagination(
+        (this.records = this.records.map(record => {
+          return {
+            ...record,
+            categoryName: categories.find(c => c.id === record.categoryId)
+              .title,
+            typeClass: record.type === "income" ? "green" : "red",
+            typeText: record.type === "income" ? "Przychody" : "Wydatki"
+          };
+        }))
+      );
     }
   },
   components: {
-    HistoryTable
+    HistoryTable,
+    DonutChart
   }
-}
+};
 </script>
