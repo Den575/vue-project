@@ -76,7 +76,7 @@
       </p>
     </div>
     <div class="card-action">
-      <div>
+      <div v-if="!isLoading">
         <button
           class="btn waves-effect waves-light auth-submit"
           type="submit"
@@ -86,7 +86,9 @@
           <i class="material-icons right">send</i>
         </button>
       </div>
-
+      <div v-else class="progress">
+        <div class="indeterminate"></div>
+      </div>
       <p class="center">
         Masz konto?
         <router-link to="/login"
@@ -106,7 +108,8 @@ export default {
     email: "",
     password: "",
     name: "",
-    agree: false
+    agree: false,
+    isLoading: false
   }),
   validations: {
     email: { email, required },
@@ -116,6 +119,7 @@ export default {
   },
   methods: {
     async submitHandler() {
+      this.isLoading = true;
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
@@ -128,6 +132,7 @@ export default {
       };
 
       await this.$store.dispatch("register", formData);
+      this.isLoading = false;
       this.$router.push("/");
     }
   }
